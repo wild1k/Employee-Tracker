@@ -41,6 +41,8 @@ salary DECIMAL(10, 0) NOT NULL,
 INSERT INTO role (role_title, salary, dept_id)
 VALUES ("HR Manager", 200000, 12);
 
+
+
 SELECT * FROM role;
 
 

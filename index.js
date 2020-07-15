@@ -145,4 +145,82 @@ connection.connect(function(err) {
         );
       });
   }
+  
+  function addEmp() {
+    inquirer
+      .prompt([
+        {
+        name: "firstName",
+        type: "input",
+        message: "Add the New Employees First name here",
+        },
+        {
+        name: "lastName",
+        type: "input",
+        message: "Add the New Employee Last name here",
+        },
+        {
+        name: "roleId",
+        type: "input",
+        message: "Add the ID number for this Employees new Role here",
+        },
+        {
+            name: "mangerId",
+            type: "input",
+            message: "What is the ID number for this Employees' Manager?",
+        },
+    ])
+      .then(function(answer) {
+        // when finished prompting, insert a new item into the db with that info
+        connection.query(
+          "INSERT INTO employee SET ?",
+          {
+            first_name: answer.firstName,
+            last_name: answer.lastName,
+            role_id: answer.roleId,
+            manager_id: answer.managerId,
+          },
+          
+          function(err) {
+            if (err) throw err;
+            console.log("Your Employee was created successfully!");
+           console.table(answer); 
+            // re-prompt the user for if they want to bid or post
+            
+            start();
+          }
+        );
+      });
+  }
+
+  function viewDept() {
+    console.log("Selecting all departments...\n");
+    connection.query("SELECT * FROM department", function(err, res) {
+      if (err) throw err;
+      // Log all results of the SELECT statement
+      console.table(res);
+      start();
+      // connection.end();
+    });
+  }
+  function viewRole() {
+    console.log("Selecting all roles...\n");
+    connection.query("SELECT * FROM role", function(err, res) {
+      if (err) throw err;
+      // Log all results of the SELECT statement
+      console.table(res);
+      start();
+      // connection.end();
+    });
+  }
+  function viewEmp() {
+    console.log("Selecting all employees...\n");
+    connection.query("SELECT * FROM employee", function(err, res) {
+      if (err) throw err;
+      // Log all results of the SELECT statement
+      console.table(res);
+      start();
+      // connection.end();
+    });
+  }
 
