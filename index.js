@@ -36,7 +36,7 @@ connection.connect(function(err) {
           "View a Department",
           "View a Role",
           "View an Employee",
-          "Update an Employees' Role",
+          // "Update an Employees' Role",
           "Finished"
         ]
       })
@@ -67,11 +67,12 @@ connection.connect(function(err) {
         case "View an Employee":
             viewEmp();
             break;
-        case "Update an Employees' Role":
-            updateEmp();
+        // case "Update an Employees' Role":
+            // upEmpRole();
         case "Finished":
             default:
                 console.log("You completed all your tasks!");
+                connection.end();
             
         }
       });
@@ -210,9 +211,10 @@ connection.connect(function(err) {
       // Log all results of the SELECT statement
       console.table(res);
       start();
-      // connection.end();
+      ;
     });
   }
+  
   function viewEmp() {
     console.log("Selecting all employees...\n");
     connection.query("SELECT * FROM employee", function(err, res) {
@@ -220,7 +222,6 @@ connection.connect(function(err) {
       // Log all results of the SELECT statement
       console.table(res);
       start();
-      // connection.end();
     });
   }
 
